@@ -167,3 +167,63 @@ This will be repeated until there is convergence, which means that there will be
 
 knitr::include_graphics("cl6.JPG")
 ```
+
+## Determine the cluster number
+
+In this case will determine the cluster number using the annual income vs the spending score this with 3 different methods.
+ 
+```{r , echo = FALSE,warning=FALSE,message=FALSE}
+data1<-cstmrs[,5:6]
+head(data1)
+
+```
+
+### Cluster with Hubert Index 
+ 
+ 
+```{r , echo = FALSE,warning=FALSE,message=FALSE}
+ 
+nb <- NbClust(data1, distance = "euclidean", min.nc = 2,
+              max.nc = 10, method = "kmeans")
+```
+
+### Elbow method with iterative kmeans
+ 
+ 
+```{r , echo = FALSE,warning=FALSE,message=FALSE}
+ 
+set.seed(123)
+
+ks <- 1:10
+tot_within_ss <- sapply(ks, function(k) {
+  cl <- kmeans(data1, k, nstart = 100)
+  cl$tot.withinss
+})
+# plot "the elbow method"
+plot(ks, tot_within_ss, type = "b",
+     xlab="Number of clusters k",
+     ylab="Total within-clusters sum of squares")
+
+```
+
+### Silhouette method
+ 
+ 
+```{r , echo = FALSE,warning=FALSE,message=FALSE}
+
+fviz_nbclust(data1, kmeans, method="silhouette")
+
+```
+
+### Visualization of clusters
+
+
+```{r , echo = FALSE,warning=FALSE,message=FALSE}
+ 
+kc <- kmeans( data1, 4 , nstart = 25, iter.max = 100 )
+clusplot( data1, kc$cluster, color = TRUE, 
+          shade = FALSE, labels = 4, lines = 1,
+          col.p = kc$cluster )
+
+
+```

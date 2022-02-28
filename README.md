@@ -112,3 +112,60 @@ iterations is reached, thus generating a classification of the
 observations in homogeneous groups.
 
 ![](cl6.JPG)<!-- -->
+
+## Determine the cluster number
+
+In this case will determine the cluster number using the annual income
+vs the spending score this with 3 different methods.
+
+    #>   Annual.Income..k.. Spending.Score..1.100.
+    #> 1                 15                     39
+    #> 2                 15                     81
+    #> 3                 16                      6
+    #> 4                 16                     77
+    #> 5                 17                     40
+    #> 6                 17                     76
+
+### Cluster with Hubert Index
+
+![](README_files/figure-gfm/unnamed-chunk-14-1.png)<!-- -->
+
+    #> *** : The Hubert index is a graphical method of determining the number of clusters.
+    #>                 In the plot of Hubert index, we seek a significant knee that corresponds to a 
+    #>                 significant increase of the value of the measure i.e the significant peak in Hubert
+    #>                 index second differences plot. 
+    #> 
+
+![](README_files/figure-gfm/unnamed-chunk-14-2.png)<!-- -->
+
+    #> *** : The D index is a graphical method of determining the number of clusters. 
+    #>                 In the plot of D index, we seek a significant knee (the significant peak in Dindex
+    #>                 second differences plot) that corresponds to a significant increase of the value of
+    #>                 the measure. 
+    #>  
+    #> ******************************************************************* 
+    #> * Among all indices:                                                
+    #> * 4 proposed 2 as the best number of clusters 
+    #> * 1 proposed 3 as the best number of clusters 
+    #> * 8 proposed 4 as the best number of clusters 
+    #> * 8 proposed 6 as the best number of clusters 
+    #> * 2 proposed 10 as the best number of clusters 
+    #> 
+    #>                    ***** Conclusion *****                            
+    #>  
+    #> * According to the majority rule, the best number of clusters is  4 
+    #>  
+    #>  
+    #> *******************************************************************
+
+### Elbow method with iterative kmeans
+
+![](README_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+### Silhouette method
+
+![](README_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
+
+### Visualization of clusters
+
+![](README_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->

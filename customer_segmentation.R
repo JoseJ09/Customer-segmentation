@@ -13,8 +13,9 @@ library(FactoMineR)
 
 
 cstmrs<-read.table("sc.csv",header=T,sep=",")
-head(cstmrs)
+names(cstmrs)
 str(cstmrs)
+head(cstmrs)
 summary(cstmrs)
 summary(cstmrs$Age)
 summary(cstmrs$Annual.Income..k..)
@@ -33,7 +34,7 @@ tb<-table(cstmrs$Gender)
 pct<-round(tb/sum(tb)*100)
 lbls<-paste(c("Female","Male")," ",pct,"%",sep = "")
 
-pie3D(tb, ,labels=lbls,main = "Gender Comparison",
+pie3D(tb ,labels=lbls,main = "Gender Comparison",
      col=brewer.pal(n = 3, name = "Pastel1"))
 
 
@@ -74,25 +75,25 @@ plot(ks, tot_within_ss, type = "b",
      xlab="Number of clusters k",
      ylab="Total within-clusters sum of squares")
 
+#plot the elbow method with nbclust 
+fviz_nbclust(data1, kmeans, method="wss")
+
+
+#Silhouette
+
+fviz_nbclust(data1, kmeans, method="silhouette")
+
+#Visualization of clusters
+
 # color per groups
+mfcol=c(1,1)
 kc <- kmeans( data1, 4 , nstart = 25, iter.max = 100 )
 clusplot( data1, kc$cluster, color = TRUE, 
           shade = FALSE, labels = 4, lines = 1,
           col.p = kc$cluster )
 
 
-#Silhouette
-
-set.seed(123)
-km<-kmeans(data1,10,iter.max=100,nstart=100,algorithm="Lloyd")
-s2<-plot(silhouette(km$cluster,dist(data1,"euclidean")))
-
-plot(ks, km, type = "b",
-     xlab="Number of clusters k",
-     ylab="Total within-clusters sum of squares")
-
 cl_hcpc <- HCPC( data1, nb.clust = 4)
 
-fviz_nbclust(data1, kmeans, method="wss")
 
-fviz_nbclust(data1, kmeans, method="silhouette")
+
